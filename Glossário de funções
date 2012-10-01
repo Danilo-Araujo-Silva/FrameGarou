@@ -1,0 +1,18 @@
+Funções
+=======
+legivel
+  Se não passado nenhum parâmetro, imprime o nome do arquivo vigente e o número
+  da linha corrente de forma legível.
+  
+  Se passado o nome de uma variável (podendo ser um vetor), imprime o nome do
+  arquivo vigente, o número da linha, o nome da variável e o seu conteúdo de
+  legíveis.
+
+l
+  Alias para a função legivel.
+
+legivelEPara
+  Mesmo que a função legivel, mas para a execução do código naquele ponto.
+
+lp
+  Alias para a função legivelEPara.
