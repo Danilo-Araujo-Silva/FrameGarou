@@ -17,6 +17,8 @@ $vetor['gamma']= 'GAMMA';
 
 $variavel = '123';
 
+define('__CONSTANTE__','/1/2/3');
+
 //echo "Error at line " . __LINE__ . " in file " . __FILE__;
 //echo nomeVariavel($vetor);
 // legivelEPara($vetor);
@@ -35,4 +37,29 @@ $variavel = '123';
 // v();
 // vp();
 // v();
+
+//echo __CONSTANTE__;
+//d(__CONSTANTE__);
+//s();
+// $l=__LINE__.":".__FILE__;
+// dp($l);
+
+// $msg='teste';
+// log1();
+// 
+// function log1(){
+//   $bt = debug_backtrace();
+//   $caller = array_shift($bt);
+//   
+//   l($bt);
+//   l($caller);
+// }
+
+//linhaEArquivo();
+//legivel($vetor);
+// lp();
+// l($vetor);
+// lp($vetor);
+vp();
+
 ?>

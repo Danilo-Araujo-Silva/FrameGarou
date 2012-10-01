@@ -13,7 +13,7 @@ Descrição: classe para auxiliar na inspeção, correção e debugação de códigos na 
 if(file_exists('garoudebug.php')){
   include('garoudebug.php');
 }else{
-  echo '<br>garoudebug não achado<br>';
+  echo '<br>garoudebug não achado.<br>';
   exit;
 }
 //------------------------------------------------------------
@@ -24,7 +24,23 @@ garou();
 
 function d($texto=null){
 //Alias para a função imprimeTextoLegivel.
-    imprimeTextoLegivel($texto);
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    $arquivo = $chamada['file'];
+    imprimeTextoLegivel($texto,$linha,$arquivo);
+}
+
+function dp($texto=null){
+//Alias para a função imprimeTextoLegivel mas para a execução.
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    $arquivo = $chamada['file'];
+    imprimeTextoLegivel($texto,$linha,$arquivo);
+    exit;
 }
 
 function garou(){
@@ -34,9 +50,29 @@ function garou(){
     exit;
 }
 
-function imprimeTextoLegivel($texto=null){
+function imprimeTextoLegivel($texto=null,$linha=null,$arquivo=null){
 //Imprime um texto de forma legível. Se não houver texto imprive uma
 //  mensagem padronizada.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+    
+    $cabecalho  = "\n";
+    $cabecalho .= "<br>";
+    $cabecalho .= "Linha: ";
+    $cabecalho .= $linha;
+    $cabecalho .= "\n";
+    $cabecalho .= "<br>";
+    $cabecalho .= "Arquivo: ";
+    $cabecalho .= $arquivo;
+    
+    echo $cabecalho;
+    
+    
     $retorno  = "\n";
     $retorno .= "<br>";
     
@@ -84,10 +120,16 @@ function imprimeVetorLegivel($vetor){
 
 function l(&$parametro=null){
 //Alias para a função legivel.
-    legivel($parametro);
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    $arquivo = $chamada['file'];
+    
+    legivel($parametro,$linha,$arquivo);
 }
 
-function legivel(&$parametro=null){
+function legivel(&$parametro=null,$linha=null,$arquivo=null){
 //Não completamente implementada ainda. 
 //Se não passado nenhum parâmetro, imprime o nome do arquivo vigente e o número
 //  da linha corrente de forma legível.
@@ -95,6 +137,26 @@ function legivel(&$parametro=null){
 //Se passado o nome de uma variável (podendo ser um vetor), imprime o nome do
 //  arquivo vigente, o número da linha, o nome da variável e o seu conteúdo de
 //  legíveis.
+    
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+    
+    $cabecalho  = "\n";
+    $cabecalho .= "<br>";
+    $cabecalho .= "Linha: ";
+    $cabecalho .= $linha;
+    $cabecalho .= "\n";
+    $cabecalho .= "<br>";
+    $cabecalho .= "Arquivo: ";
+    $cabecalho .= $arquivo;
+    
+    echo $cabecalho;
+    
     if(isset($parametro)){
       $nomeVariavel=nomeVariavel($parametro);
       
@@ -115,7 +177,7 @@ function legivel(&$parametro=null){
     }
 }
 
-function legivelEPara(&$parametro=null){
+function legivelEPara(&$parametro=null,$linha=null,$arquivo=null){
 //Não completamente implementada ainda. 
 //Se não passado nenhum parâmetro, imprime o nome do arquivo vigente e o número
 //  da linha corrente de forma legível. Para a execução neste ponto.
@@ -123,14 +185,28 @@ function legivelEPara(&$parametro=null){
 //Se passado o nome de uma variável (podendo ser um vetor), imprime o nome do
 //  arquivo vigente, o número da linha, o nome da variável e o seu conteúdo de
 //  legíveis. Para a execução neste ponto.
-    legivel($parametro);
+    legivel($parametro,$linha,$arquivo);
     exit;
     
 }
 
+function linhaEArquivo(){
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    echo $chamada['line'];
+    //l($chamada['line']);
+}
+
 function lp(&$parametro=null){
 //Alias para a função legivelEPara.
-    legivelEPara($parametro);
+
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    $arquivo = $chamada['file'];
+    
+    legivelEPara($parametro,$linha,$arquivo);
 }
 
 function nomeVariavel(&$variavel, $escopo=false, $prefixo='unique', $sufixo='value'){
@@ -148,24 +224,46 @@ function nomeVariavel(&$variavel, $escopo=false, $prefixo='unique', $sufixo='val
     return $nomeVariavel;
 }
 
-function mostraVariaveis(){
-//Mostra os valores das variáveis vigentes.
-    legivel($GLOBALS);
+function mostrarSessao(){
+//Mostra os valores das variaveis da sessão.
+    legivel($_SESSION);
 }
 
-function mostraVariaveisEPara(){
+function mostrarSessaoEPara(){
+//Mostra os valores das variaveis da sessão. Para a execução.
+    legivelEPara($_SESSION);
+}
+
+function mostraVariaveisEConstantes(){
+//Mostra os valores das variáveis vigentes.
+    legivel($GLOBALS);
+    legivel(get_defined_constants());
+}
+
+function mostraVariaveisEConstantesEPara(){
 //Mostra os valores das variáveis vigentes. Para a execução.
-    legivelEPara($GLOBALS);
+    legivel($GLOBALS);
+    legivelEPara(get_defined_constants());
+}
+
+function s(){
+//Alias para a função mostrarSessao.
+    mostrarSessao();
+}
+
+function sp(){
+//Alias para a função mostrarSessaoEPara.
+    mostrarSessaoEPara();
 }
 
 function v(){
 //Alias para a função mostraVariaveis.
-    mostraVariaveis();
+    mostraVariaveisEConstantes();
 }
 
 function vp(){
 //Alias para a função mostraVariaveisEPara.
-    mostraVariaveisEPara();
+    mostraVariaveisEConstantesEPara();
 }
 
 ?>
