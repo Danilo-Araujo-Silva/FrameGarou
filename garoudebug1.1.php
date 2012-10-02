@@ -13,7 +13,7 @@ Descrição: classe para auxiliar na inspeção, correção e debugação de códigos na 
 if(file_exists('garoudebug.php')){
   include('garoudebug.php');
 }else{
-  echo '<br>garoudebug não achado.<br>';
+  echo '<br>GarouDebug não encontrado.<br>';
   exit;
 }
 //------------------------------------------------------------
@@ -257,12 +257,12 @@ function sp(){
 }
 
 function v(){
-//Alias para a função mostraVariaveis.
+//Alias para a função mostraVariaveisEConstantes.
     mostraVariaveisEConstantes();
 }
 
 function vp(){
-//Alias para a função mostraVariaveisEPara.
+//Alias para a função mostraVariaveisEConstantesEPara.
     mostraVariaveisEConstantesEPara();
 }
 

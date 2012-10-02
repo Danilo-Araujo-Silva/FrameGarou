@@ -1,10 +1,10 @@
 <?php
 //Código para inclusão no arquivo a ser debugado:
 //------------------------------------------------------------
-if(file_exists('garoudebug1.2.php')){
-  include('garoudebug1.2.php');
+if(file_exists('garoudebug1.1.php')){
+  include('garoudebug1.1.php');
 }else{
-  echo '<br>garoudebug não achado<br>';
+  echo '<br>GarouDebug não encontrado.<br>';
   exit;
 }
 //------------------------------------------------------------
