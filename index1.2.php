@@ -29,7 +29,8 @@ define('__CONSTANTE__','/1/2/3');
 //vcp();
 //l($vetor);
 //d('asdfadsf');
-
+l();
+lp();
 ?>
 
 <html>

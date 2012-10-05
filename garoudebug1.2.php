@@ -163,43 +163,46 @@ function legivel(&$parametro=null,$linha=null,$arquivo=null){
 //Se passado o nome de uma variável (podendo ser um vetor), imprime o nome do
 //  arquivo vigente, o número da linha, o nome da variável e o seu conteúdo de
 //  legíveis.
-    
-    if(!isset($linha) or !isset($arquivo)){
-        $backtrace = debug_backtrace();
-        $chamada = array_shift($backtrace);
+    if($parametro!=null){
+        if(!isset($linha) or !isset($arquivo)){
+            $backtrace = debug_backtrace();
+            $chamada = array_shift($backtrace);
+            
+            $linha = $chamada['line'];
+            $arquivo = $chamada['file'];
+        }
         
-        $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
-    }
-    
-    $cabecalho  = "\n";
-    $cabecalho .= "<br>";
-    $cabecalho .= "Linha: ";
-    $cabecalho .= $linha;
-    $cabecalho .= "\n";
-    $cabecalho .= "<br>";
-    $cabecalho .= "Arquivo: ";
-    $cabecalho .= $arquivo;
-    
-    echo $cabecalho;
-    
-    if(isset($parametro)){
-      $nomeVariavel=nomeVariavel($parametro);
-      
-      $cabecalho  = "\n";
-      $cabecalho .= "<br>";
-      $cabecalho .= $nomeVariavel;
-      $cabecalho .= ":";
-      $cabecalho .= "<br>";
-      $cabecalho .= "\n";
-      
-      echo $cabecalho;
-      
-      if(is_array($parametro)){
-          imprimeVetorLegivel($parametro);
-      }else{
-          imprimeVariavelLegivel($parametro);
-      }
+        $cabecalho  = "\n";
+        $cabecalho .= "<br>";
+        $cabecalho .= "Linha: ";
+        $cabecalho .= $linha;
+        $cabecalho .= "\n";
+        $cabecalho .= "<br>";
+        $cabecalho .= "Arquivo: ";
+        $cabecalho .= $arquivo;
+        
+        echo $cabecalho;
+        
+        if(isset($parametro)){
+          $nomeVariavel=nomeVariavel($parametro);
+          
+          $cabecalho  = "\n";
+          $cabecalho .= "<br>";
+          $cabecalho .= $nomeVariavel;
+          $cabecalho .= ":";
+          $cabecalho .= "<br>";
+          $cabecalho .= "\n";
+          
+          echo $cabecalho;
+          
+          if(is_array($parametro)){
+              imprimeVetorLegivel($parametro);
+          }else{
+              imprimeVariavelLegivel($parametro);
+          }
+        }
+    }else{
+        m();
     }
 }
 
@@ -211,7 +214,11 @@ function legivelEPara(&$parametro=null,$linha=null,$arquivo=null){
 //Se passado o nome de uma variável (podendo ser um vetor), imprime o nome do
 //  arquivo vigente, o número da linha, o nome da variável e o seu conteúdo de
 //  legíveis. Para a execução neste ponto.
-    legivel($parametro,$linha,$arquivo);
+    if($parametro!=null){
+        legivel($parametro,$linha,$arquivo);
+    }else{
+        mp();
+    }
     exit;
     
 }
