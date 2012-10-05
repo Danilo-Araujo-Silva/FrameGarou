@@ -1,7 +1,7 @@
 <?php
 /**
 Autor: Danilo Araújo Silva
-Última atualização: 01-10-2012
+Última atualização: 04-10-2012
 Descrição: classe para auxiliar na inspeção, correção e debugação de códigos na linguagem PHP.
  Têm o objetivo de ser independente do sistema, funcionando apenas com a inclusão deste arquivo.
 */
@@ -22,7 +22,7 @@ garou();
 
 */
 
-function d($texto=null){
+function m($texto=null){
 //Alias para a função imprimeTextoLegivel.
     $backtrace = debug_backtrace();
     $chamada = array_shift($backtrace);
@@ -32,7 +32,7 @@ function d($texto=null){
     imprimeTextoLegivel($texto,$linha,$arquivo);
 }
 
-function dp($texto=null){
+function mp($texto=null){
 //Alias para a função imprimeTextoLegivel mas para a execução.
     $backtrace = debug_backtrace();
     $chamada = array_shift($backtrace);
