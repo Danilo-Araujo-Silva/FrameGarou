@@ -44,7 +44,7 @@ function dp($texto=null){
 }
 
 function g(){
-//Alias para a função mostrarGET.
+//Alias para a função mostraGET.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -53,7 +53,7 @@ function g(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarGET($linha,$arquivo);
+    mostraGET($linha,$arquivo);
 }
 
 function garou(){
@@ -64,7 +64,7 @@ function garou(){
 }
 
 function gp(){
-//Alias para a função mostrarGETEPara.
+//Alias para a função mostraGETEPara.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -73,7 +73,7 @@ function gp(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarGETEPara($linha,$arquivo);
+    mostraGETEPara($linha,$arquivo);
 }
 
 function imprimeTextoLegivel($texto=null,$linha=null,$arquivo=null){
@@ -250,7 +250,7 @@ function nomeVariavel(&$variavel, $escopo=false, $prefixo='unique', $sufixo='val
     return $nomeVariavel;
 }
 
-function mostrarGET($linha=null,$arquivo=null){
+function mostraGET($linha=null,$arquivo=null){
 //Mostra os valores da variável GET.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -263,7 +263,7 @@ function mostrarGET($linha=null,$arquivo=null){
     legivel($_GET,$linha,$arquivo);
 }
 
-function mostrarGETEPARA($linha=null,$arquivo=null){
+function mostraGETEPARA($linha=null,$arquivo=null){
 //Mostra os valores da variável GET. Para a execução.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -276,7 +276,7 @@ function mostrarGETEPARA($linha=null,$arquivo=null){
     legivelEPara($_GET,$linha,$arquivo);
 }
 
-function mostrarPOST($linha=null,$arquivo=null){
+function mostraPOST($linha=null,$arquivo=null){
 //Mostra os valores da variável POST.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -289,7 +289,7 @@ function mostrarPOST($linha=null,$arquivo=null){
     legivel($_POST,$linha,$arquivo);
 }
 
-function mostrarPOSTEPARA($linha=null,$arquivo=null){
+function mostraPOSTEPARA($linha=null,$arquivo=null){
 //Mostra os valores da variável POST. Para a execução.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -302,7 +302,7 @@ function mostrarPOSTEPARA($linha=null,$arquivo=null){
     legivelEPara($_POST,$linha,$arquivo);
 }
 
-function mostrarREQUEST($linha=null,$arquivo=null){
+function mostraREQUEST($linha=null,$arquivo=null){
 //Mostra os valores da variável REQUEST.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -315,7 +315,7 @@ function mostrarREQUEST($linha=null,$arquivo=null){
     legivel($_REQUEST,$linha,$arquivo);
 }
 
-function mostrarREQUESTEPARA($linha=null,$arquivo=null){
+function mostraREQUESTEPARA($linha=null,$arquivo=null){
 //Mostra os valores da variável REQUEST. Para a execução.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -328,7 +328,7 @@ function mostrarREQUESTEPARA($linha=null,$arquivo=null){
     legivelEPara($_REQUEST,$linha,$arquivo);
 }
 
-function mostrarSESSION($linha=null,$arquivo=null){
+function mostraSESSION($linha=null,$arquivo=null){
 //Mostra os valores das variaveis da sessão.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -341,7 +341,7 @@ function mostrarSESSION($linha=null,$arquivo=null){
     legivel($_SESSION,$linha,$arquivo);
 }
 
-function mostrarSESSIONEPara($linha=null,$arquivo=null){
+function mostraSESSIONEPara($linha=null,$arquivo=null){
 //Mostra os valores das variaveis da sessão. Para a execução.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
@@ -354,20 +354,62 @@ function mostrarSESSIONEPara($linha=null,$arquivo=null){
     legivelEPara($_SESSION,$linha,$arquivo);
 }
 
-function mostraVariaveisEConstantes(){
+function mostraVariaveis($linha=null,$arquivo=null){
 //Mostra os valores das variáveis vigentes.
-    legivel($GLOBALS);
-    legivel(get_defined_constants());
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    legivel($GLOBALS,$linha,$arquivo);
 }
 
-function mostraVariaveisEConstantesEPara(){
+function mostraVariaveisEPara($linha=null,$arquivo=null){
 //Mostra os valores das variáveis vigentes. Para a execução.
-    legivel($GLOBALS);
-    legivelEPara(get_defined_constants());
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    legivelEPara($GLOBALS,$linha,$arquivo);
+}
+
+function mostraVariaveisEConstantes($linha=null,$arquivo=null){
+//Mostra os valores das variáveis vigentes.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    legivel($GLOBALS,$linha,$arquivo);
+    legivel(get_defined_constants(),$linha,$arquivo);
+}
+
+function mostraVariaveisEConstantesEPara($linha=null,$arquivo=null){
+//Mostra os valores das variáveis vigentes. Para a execução.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    legivel($GLOBALS,$linha,$arquivo);
+    legivelEPara(get_defined_constants(),$linha,$arquivo);
 }
 
 function p(){
-//Alias para a função mostrarPOST.
+//Alias para a função mostraPOST.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -376,11 +418,11 @@ function p(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarPOST($linha,$arquivo);
+    mostraPOST($linha,$arquivo);
 }
 
 function pp(){
-//Alias para a função mostrarPOSTEPara.
+//Alias para a função mostraPOSTEPara.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -389,11 +431,11 @@ function pp(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarPOSTEPara($linha,$arquivo);
+    mostraPOSTEPara($linha,$arquivo);
 }
 
 function r(){
-//Alias para a função mostrarREQUEST.
+//Alias para a função mostraREQUEST.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -402,11 +444,11 @@ function r(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarREQUEST($linha,$arquivo);
+    mostraREQUEST($linha,$arquivo);
 }
 
 function rp(){
-//Alias para a função mostrarREQUESTEPara.
+//Alias para a função mostraREQUESTEPara.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -415,11 +457,11 @@ function rp(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarREQUESTEPara($linha,$arquivo);
+    mostraREQUESTEPara($linha,$arquivo);
 }
 
 function s(){
-//Alias para a função mostrarSESSION.
+//Alias para a função mostraSESSION.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -428,11 +470,11 @@ function s(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarSESSION($linha,$arquivo);
+    mostraSESSION($linha,$arquivo);
 }
 
 function sp(){
-//Alias para a função mostrarSESSIONEPara.
+//Alias para a função mostraSESSIONEPara.
     if(!isset($linha) or !isset($arquivo)){
         $backtrace = debug_backtrace();
         $chamada = array_shift($backtrace);
@@ -441,17 +483,59 @@ function sp(){
         $arquivo = $chamada['file'];
     }
 
-    mostrarSESSIONEPara($linha,$arquivo);
+    mostraSESSIONEPara($linha,$arquivo);
 }
 
 function v(){
-//Alias para a função mostraVariaveisEConstantes.
-    mostraVariaveisEConstantes();
+//Alias para a função mostraVariaveis.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    mostraVariaveis($linha,$arquivo);
 }
 
 function vp(){
+//Alias para a função mostraVariaveisEPara.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    mostraVariaveisEPara($linha,$arquivo);
+}
+
+function vc(){
+//Alias para a função mostraVariaveisEConstantes.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    mostraVariaveisEConstantes($linha,$arquivo);
+}
+
+function vcp(){
 //Alias para a função mostraVariaveisEConstantesEPara.
-    mostraVariaveisEConstantesEPara();
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        $arquivo = $chamada['file'];
+    }
+
+    mostraVariaveisEConstantesEPara($linha,$arquivo);
 }
 
 ?>

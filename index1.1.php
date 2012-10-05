@@ -60,6 +60,42 @@ define('__CONSTANTE__','/1/2/3');
 // lp();
 // l($vetor);
 // lp($vetor);
-vp();
+//vp();
+// if(isset($_POST)){
+// 	l($_POST);
+// }
+
+// if(isset($_GET)){
+// 	l($_GET);
+// }
+//mostrarGETEPara();
+//g();
+//p();
+//gp();
+//pp();
+//r();
+//s();
+//rp();
+//session_start();
+//$_SESSION['user']='garou';
+//sp();
+lp($a='teste');
 
 ?>
+<html>
+<head></head>
+<body>
+	<form action='index1.1.php' method='post'>
+		<INPUT type="text" name="atributo1">
+		<INPUT type="text" name="atributo2">
+		<INPUT type="submit" value="Enviar">
+		<INPUT type="reset">
+	</form>
+	<form action='index1.1.php' method='get'>
+		<INPUT type="text" name="atributo1">
+		<INPUT type="text" name="atributo2">
+		<INPUT type="submit" value="Enviar">
+		<INPUT type="reset">
+	</form>
+</body>
+</html>
