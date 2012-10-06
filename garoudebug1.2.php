@@ -28,7 +28,9 @@ function m($texto=null){
     $chamada = array_shift($backtrace);
     
     $linha = $chamada['line'];
-    $arquivo = $chamada['file'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
+
     imprimeTextoLegivel($texto,$linha,$arquivo);
 }
 
@@ -38,7 +40,9 @@ function mp($texto=null){
     $chamada = array_shift($backtrace);
     
     $linha = $chamada['line'];
-    $arquivo = $chamada['file'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
+
     imprimeTextoLegivel($texto,$linha,$arquivo);
     exit;
 }
@@ -50,7 +54,8 @@ function g(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraGET($linha,$arquivo);
@@ -70,7 +75,8 @@ function gp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraGETEPara($linha,$arquivo);
@@ -84,7 +90,8 @@ function imprimeTextoLegivel($texto=null,$linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
     
     $cabecalho  = "\n";
@@ -150,13 +157,13 @@ function l(&$parametro=null){
     $chamada = array_shift($backtrace);
     
     $linha = $chamada['line'];
-    $arquivo = $chamada['file'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
     
     legivel($parametro,$linha,$arquivo);
 }
 
-function legivel(&$parametro=null,$linha=null,$arquivo=null){
-//Não completamente implementada ainda. 
+function legivel(&$parametro=null,$linha=null,$arquivo=null){ 
 //Se não passado nenhum parâmetro, imprime o nome do arquivo vigente e o número
 //  da linha corrente de forma legível.
 // 
@@ -169,7 +176,8 @@ function legivel(&$parametro=null,$linha=null,$arquivo=null){
             $chamada = array_shift($backtrace);
             
             $linha = $chamada['line'];
-            $arquivo = $chamada['file'];
+            //$arquivo = $chamada['file'];
+            $arquivo = $_SERVER['PHP_SELF'];
         }
         
         $cabecalho  = "\n";
@@ -207,7 +215,6 @@ function legivel(&$parametro=null,$linha=null,$arquivo=null){
 }
 
 function legivelEPara(&$parametro=null,$linha=null,$arquivo=null){
-//Não completamente implementada ainda. 
 //Se não passado nenhum parâmetro, imprime o nome do arquivo vigente e o número
 //  da linha corrente de forma legível. Para a execução neste ponto.
 // 
@@ -237,7 +244,8 @@ function lp(&$parametro=null){
     $chamada = array_shift($backtrace);
     
     $linha = $chamada['line'];
-    $arquivo = $chamada['file'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
     
     legivelEPara($parametro,$linha,$arquivo);
 }
@@ -264,7 +272,8 @@ function mostraGET($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($_GET,$linha,$arquivo);
@@ -277,7 +286,8 @@ function mostraGETEPARA($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivelEPara($_GET,$linha,$arquivo);
@@ -290,7 +300,8 @@ function mostraPOST($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($_POST,$linha,$arquivo);
@@ -303,7 +314,8 @@ function mostraPOSTEPARA($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivelEPara($_POST,$linha,$arquivo);
@@ -316,7 +328,8 @@ function mostraREQUEST($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($_REQUEST,$linha,$arquivo);
@@ -329,7 +342,8 @@ function mostraREQUESTEPARA($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivelEPara($_REQUEST,$linha,$arquivo);
@@ -342,7 +356,8 @@ function mostraSESSION($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($_SESSION,$linha,$arquivo);
@@ -355,7 +370,8 @@ function mostraSESSIONEPara($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivelEPara($_SESSION,$linha,$arquivo);
@@ -368,7 +384,8 @@ function mostraVariaveis($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($GLOBALS,$linha,$arquivo);
@@ -381,7 +398,8 @@ function mostraVariaveisEPara($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivelEPara($GLOBALS,$linha,$arquivo);
@@ -394,7 +412,8 @@ function mostraVariaveisEConstantes($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($GLOBALS,$linha,$arquivo);
@@ -408,7 +427,8 @@ function mostraVariaveisEConstantesEPara($linha=null,$arquivo=null){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     legivel($GLOBALS,$linha,$arquivo);
@@ -422,7 +442,8 @@ function p(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraPOST($linha,$arquivo);
@@ -435,7 +456,8 @@ function pp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraPOSTEPara($linha,$arquivo);
@@ -448,7 +470,8 @@ function r(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraREQUEST($linha,$arquivo);
@@ -461,7 +484,8 @@ function rp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraREQUESTEPara($linha,$arquivo);
@@ -474,7 +498,8 @@ function s(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraSESSION($linha,$arquivo);
@@ -487,7 +512,8 @@ function sp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraSESSIONEPara($linha,$arquivo);
@@ -500,7 +526,8 @@ function v(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraVariaveis($linha,$arquivo);
@@ -513,7 +540,8 @@ function vp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraVariaveisEPara($linha,$arquivo);
@@ -526,7 +554,8 @@ function vc(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraVariaveisEConstantes($linha,$arquivo);
@@ -539,7 +568,8 @@ function vcp(){
         $chamada = array_shift($backtrace);
         
         $linha = $chamada['line'];
-        $arquivo = $chamada['file'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
 
     mostraVariaveisEConstantesEPara($linha,$arquivo);

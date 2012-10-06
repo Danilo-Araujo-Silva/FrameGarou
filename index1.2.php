@@ -29,8 +29,29 @@ define('__CONSTANTE__','/1/2/3');
 //vcp();
 //l($vetor);
 //d('asdfadsf');
-l();
-lp();
+//l();
+//lp();
+	function a(&$var){
+		$backtrace = debug_backtrace();
+	    $call = array_shift($backtrace);
+	    
+	    $line = $call['line'];
+	    $file = $call['file'];
+
+	    echo $var."<br>".$line."<br>".$file;
+	}
+
+	$variable='text in a variable';
+	//a($variable);
+	//a(null,'text out of a variable');
+//v();
+//legivel($vetor);
+// m();
+// s();
+// v();
+// p();
+// g();
+// r();
 ?>
 
 <html>
