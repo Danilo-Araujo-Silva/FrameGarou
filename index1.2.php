@@ -52,6 +52,11 @@ define('__CONSTANTE__','/1/2/3');
 // p();
 // g();
 // r();
+//l(get_defined_functions());
+// mostraFuncoes();
+// mostraFuncoesEPara();
+f();
+fp();
 ?>
 
 <html>

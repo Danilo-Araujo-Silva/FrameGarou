@@ -22,29 +22,32 @@ garou();
 
 */
 
-function m($texto=null){
-//Alias para a função imprimeTextoLegivel.
-    $backtrace = debug_backtrace();
-    $chamada = array_shift($backtrace);
-    
-    $linha = $chamada['line'];
-    //$arquivo = $chamada['file'];
-    $arquivo = $_SERVER['PHP_SELF'];
+function f(){
+//Alias para a função mostraFuncoes.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
+    }
 
-    imprimeTextoLegivel($texto,$linha,$arquivo);
+    mostraFuncoes($linha,$arquivo);
 }
 
-function mp($texto=null){
-//Alias para a função imprimeTextoLegivel mas para a execução.
-    $backtrace = debug_backtrace();
-    $chamada = array_shift($backtrace);
-    
-    $linha = $chamada['line'];
-    //$arquivo = $chamada['file'];
-    $arquivo = $_SERVER['PHP_SELF'];
+function fp(){
+//Alias para a função mostraFuncoesEPara. Para a execução.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
+    }
 
-    imprimeTextoLegivel($texto,$linha,$arquivo);
-    exit;
+    mostraFuncoesEPara($linha,$arquivo);
 }
 
 function g(){
@@ -250,19 +253,59 @@ function lp(&$parametro=null){
     legivelEPara($parametro,$linha,$arquivo);
 }
 
-function nomeVariavel(&$variavel, $escopo=false, $prefixo='unique', $sufixo='value'){
-//Retorna o nome da variável passada.
-//Necessário entender o código e vertê-lo para o português e melhorar os nomes.
-    if($escopo) $valorores = $escopo;
-    else      $valorores = $GLOBALS;
-    $antigo = $variavel;
-    $variavel = $novo = $prefixo.rand().$sufixo;
-    $nomeVariavel = FALSE;
-    foreach($valorores as $chave => $valor) {
-      if($valor === $novo) $nomeVariavel = $chave;
+function m($texto=null){
+//Alias para a função imprimeTextoLegivel.
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
+
+    imprimeTextoLegivel($texto,$linha,$arquivo);
+}
+
+function mp($texto=null){
+//Alias para a função imprimeTextoLegivel mas para a execução.
+    $backtrace = debug_backtrace();
+    $chamada = array_shift($backtrace);
+    
+    $linha = $chamada['line'];
+    //$arquivo = $chamada['file'];
+    $arquivo = $_SERVER['PHP_SELF'];
+
+    imprimeTextoLegivel($texto,$linha,$arquivo);
+    exit;
+}
+
+function mostraFuncoes($linha=null,$arquivo=null){
+//Mostra as funções definidas pelo usuário.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
     }
-    $variavel = $antigo;
-    return $nomeVariavel;
+    $funcoes=get_defined_functions();
+    $funcoes=$funcoes['user'];
+    legivel($funcoes,$linha,$arquivo);
+}
+
+function mostraFuncoesEPara($linha=null,$arquivo=null){
+//Mostra as funções definidas pelo usuário. Para a execução.
+    if(!isset($linha) or !isset($arquivo)){
+        $backtrace = debug_backtrace();
+        $chamada = array_shift($backtrace);
+        
+        $linha = $chamada['line'];
+        //$arquivo = $chamada['file'];
+        $arquivo = $_SERVER['PHP_SELF'];
+    }
+    $funcoes=get_defined_functions();
+    $funcoes=$funcoes['user'];
+    legivelEPara($funcoes,$linha,$arquivo);
 }
 
 function mostraGET($linha=null,$arquivo=null){
@@ -433,6 +476,21 @@ function mostraVariaveisEConstantesEPara($linha=null,$arquivo=null){
 
     legivel($GLOBALS,$linha,$arquivo);
     legivelEPara(get_defined_constants(),$linha,$arquivo);
+}
+
+function nomeVariavel(&$variavel, $escopo=false, $prefixo='unique', $sufixo='value'){
+//Retorna o nome da variável passada.
+//Necessário entender o código e vertê-lo para o português e melhorar os nomes.
+    if($escopo) $valorores = $escopo;
+    else      $valorores = $GLOBALS;
+    $antigo = $variavel;
+    $variavel = $novo = $prefixo.rand().$sufixo;
+    $nomeVariavel = FALSE;
+    foreach($valorores as $chave => $valor) {
+      if($valor === $novo) $nomeVariavel = $chave;
+    }
+    $variavel = $antigo;
+    return $nomeVariavel;
 }
 
 function p(){
