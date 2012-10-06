@@ -1,7 +1,7 @@
 <?php
 /**
 Autor: Danilo Araújo Silva
-Última atualização: 04-10-2012
+Última atualização: 05-10-2012
 Descrição: classe para auxiliar na inspeção, correção e debugação de códigos na linguagem PHP.
  Têm o objetivo de ser independente do sistema, funcionando apenas com a inclusão deste arquivo.
 */
